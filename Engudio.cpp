@@ -62,6 +62,8 @@ void initCallbacks(GLFWwindow* window) {
 
 int main() {
     
+
+    //TEST Rotatioon
     Voxel v = Voxel(Transform(5, 5, 5));
     v.pos.setRotation(Quaternion(20, 0, 0));
     for (int i = 0; i < v.points.size(); i++) {
@@ -89,13 +91,15 @@ int main() {
     GLFWmonitor* mon = glfwGetPrimaryMonitor();
     const GLFWvidmode* vidMode = glfwGetVideoMode(mon);
 
-    GLFWwindow* window = glfwCreateWindow(300, 200, "Engudio", FLLSCR ? mon : NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(975, 480, "Engudio", FLLSCR ? mon : NULL, NULL);
     if (window) {
         D_LOG("Created Window");
     } else {
         D_ERR("Could not create a Window");
     }
 
+
+    //Init all callbacks
     initCallbacks(window);
 
     //fits size of window to screen size
@@ -108,8 +112,10 @@ int main() {
     glfwMakeContextCurrent(window);
 
     while (!glfwWindowShouldClose(window)) {
+        
         glfwSwapBuffers(window);
         glfwPollEvents();
+        
     }
     glfwTerminate();
     return 0;
