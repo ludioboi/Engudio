@@ -46,11 +46,6 @@ void Quaternion::abs() {
 	this->z = fabsf(z);
 }
 
-void Quaternion::normalize() {
-	this->x = 1;
-	this->y = 1;
-	this->z = 1;
-}
 
 Quaternion Quaternion::operator-(Quaternion other) {
 	return Quaternion(this->x - other.x, this->y - other.y, this->z - other.z);

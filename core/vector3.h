@@ -15,6 +15,7 @@ public:
 	Vector3 operator-=(Vector3 other);
 	Vector3 operator*=(Vector3 other);
 	Vector3 operator/=(Vector3 other);
+	
 	double distance(Vector3 other);
 	double getX();
 	double getY();
@@ -23,4 +24,6 @@ public:
 	void setY(double y);
 	void setZ(double z);
 	
+
+	static Vector3 normalize(Vector3 vec3);
 };

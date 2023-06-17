@@ -1,6 +1,7 @@
-#include "vector3.h"
-#include "transform.h"
-#include "quaternion.h"
+#include "core/vector3.h"
+#include "core/transform.h"
+#include "core/quaternion.h"
+#include "game/game_state_manager.h"
 #include <iostream>
 #include <format>
 #include <windows.h> 
@@ -52,10 +53,15 @@ void D_ERR(const T& msg) {
 }
 
 
+GLFWwindow* mainWindow;
+
 //Sets all Callbacks and Handlers
-void initCallbacks(GLFWwindow* window) {
-    glfwSetWindowSizeCallback(window, [](GLFWwindow* wind, int width, int height) {
+void initCallbacks() {
+    glfwSetWindowSizeCallback(mainWindow, [](GLFWwindow* wind, int width, int height) {
         D_LOG(format("Set Screen Size to {0} x {1}", width, height));
+        });
+    glfwSetWindowFocusCallback(mainWindow, [](GLFWwindow* win, int focused) {
+       
         });
 }
 
@@ -91,8 +97,8 @@ int main() {
     GLFWmonitor* mon = glfwGetPrimaryMonitor();
     const GLFWvidmode* vidMode = glfwGetVideoMode(mon);
 
-    GLFWwindow* window = glfwCreateWindow(975, 480, "Engudio", FLLSCR ? mon : NULL, NULL);
-    if (window) {
+    mainWindow = glfwCreateWindow(640, 480, "Engudio", FLLSCR ? mon : NULL, NULL);
+    if (mainWindow) {
         D_LOG("Created Window");
     } else {
         D_ERR("Could not create a Window");
@@ -100,20 +106,25 @@ int main() {
 
 
     //Init all callbacks
-    initCallbacks(window);
+    initCallbacks();
+
 
     //fits size of window to screen size
     if (FLLSCR) {
-        glfwSetWindowSize(window, vidMode->width, vidMode->height);
+        glfwSetWindowSize(mainWindow, vidMode->width, vidMode->height);
     }
     
     
-    
-    glfwMakeContextCurrent(window);
 
-    while (!glfwWindowShouldClose(window)) {
+    //Sets window rules
+    glfwSetWindowSizeLimits(mainWindow, 640, 480, GLFW_DONT_CARE, GLFW_DONT_CARE);
+
+    
+    glfwMakeContextCurrent(mainWindow);
+
+    while (!glfwWindowShouldClose(mainWindow)) {
         
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(mainWindow);
         glfwPollEvents();
         
     }

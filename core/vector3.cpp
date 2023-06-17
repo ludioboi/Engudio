@@ -87,3 +87,9 @@ void Vector3::setY(double y) {
 void Vector3::setZ(double Z) {
     this->z = z;
 }
+
+Vector3 Vector3::normalize(Vector3 vec3) {
+    double dis = vec3.distance(Vector3(0, 0, 0));
+    Vector3 disVec = Vector3(dis, dis, dis);
+    return vec3 / disVec;
+}

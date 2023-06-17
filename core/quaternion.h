@@ -16,7 +16,6 @@ public:
 	void setY(float y);
 	void setZ(float z);
 	void abs();
-	void normalize();
 	Quaternion operator-(Quaternion other);
 	Quaternion operator+(Quaternion other);
 	Quaternion operator*(Quaternion other);
